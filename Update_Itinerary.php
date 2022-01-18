@@ -1,0 +1,70 @@
+<?php
+include("auth.php");
+?>
+<html>
+	<head>
+		<title> Peacock Marine Event Rented online System</title>
+		<link href="image/peacock.jpg" rel="shortcut icon">
+		<link href="style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="script.js"></script>
+
+
+	</head>
+	<body>
+	<div id="bander">
+	<ul class="nav">
+
+
+<li onClick="toggleSub()">
+<a href="#">Add &raquo;</a>
+<ul class="sub" id="sub">
+	
+<li><a href="Destination.php">Destination </a></li>
+<li><a href="Itinerary.php">Itinerary </a></li>
+
+<li><a href="Vessel.php">Vessel </a></li>
+<li><a href="VesselType.php">Vessel Type</a></li>
+	
+<li><a href="EventType.php">Event Type</a></li>
+</ul>
+</li>
+<li onClick="toggleSub1()">
+<a href="#">Report &raquo;</a>
+<ul class="sub1" id="sub1">
+	
+
+<li><a href="AdminVesselTypeLists.php">Vessel Type Lists</a></li>
+<li><a href="AdminVesselLists.php">Vessel  Lists</a></li>
+<li><a href="AdminBookingLists.php">Booking Lists</a></li>	
+<li><a href="AdminEventTypeLists.php">Event Type Lists</a></li>
+<li><a href="AdminItineraryLists.php">Itinerary Lists</a></li>
+<li><a href="AdminDestinationLists.php">Destination Lists</a></li>
+</ul>
+</li>
+<li><a href="Invoice.php">Invoice</a></li>
+<li><a href="index.php">Logout</a></li>
+</ul></div>
+	<div id="main1">
+<?php
+$con = mysql_connect("localhost", "root", "");
+mysql_select_db('Peacock', $con);
+$ItineraryID = $_GET['ItineraryID'];
+$result = mysql_query ("SELECT * FROM `peacock`.`itinerary` WHERE `itinerary`.`ItineraryID` = '$ItineraryID'");
+$row = mysql_fetch_assoc($result);
+?>
+<form method="post"  action="EditItinerary.php" >
+<input type = "hidden" name = "ItineraryID" value = "<?php echo $row['ItineraryID'] ?>"> 
+<center><table cellspacing="20px">
+<caption><h1> Editing Itinerary </h1></caption>
+<tr>
+<td><label >Itineray Name </label></td>
+<td><input type="text" id = "ItineraryName" name = "ItineraryName" value= "<?php echo $row['ItineraryName'] ?>"></td></tr>
+<tr>
+<td><label >Itinerary Price</label></td>
+<td><input type="text" id = "ItineraryPrice" name = "ItineraryPrice" value= "<?php echo $row['ItineraryPrice'] ?>"></td></tr>	
+<tr><th colspan="2"><input type = "submit" value = "Edit" class="button1">&nbsp;
+<input type="reset" value="Clear" class="button1"></th>
+</tr>
+</table></center></form>
+</body>
+</html>
